@@ -1,0 +1,58 @@
+name: Check Apple Mac lineup
+
+on:
+  schedule:
+    - cron: "0 1 * * 1"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Scan Apple newsroom for new Mac announcements
+        run: npm run --silent check-lineup > /tmp/scan.json
+
+      - name: Show scan result
+        run: cat /tmp/scan.json
+
+      - name: Open issues for new announcements
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          count=$(jq '.newItems | length' /tmp/scan.json)
+          echo "Found $count new Mac-related announcement(s)."
+          if [ "$count" -eq 0 ]; then
+            exit 0
+          fi
+          jq -c '.newItems[]' /tmp/scan.json | while read -r item; do
+            title=$(echo "$item"   | jq -r '.title')
+            link=$(echo "$item"    | jq -r '.link')
+            pubDate=$(echo "$item" | jq -r '.pubDate')
+            issue_title="[lineup] ${title}"
+            existing=$(gh issue list \
+              --state all \
+              --search "${issue_title} in:title" \
+              --json title --jq '.[].title' \
+              | grep -Fx "${issue_title}" || true)
+            if [ -n "${existing}" ]; then
+              echo "Skipping existing issue: ${issue_title}"
+              continue
+            fi
+            body=$(printf 'New Apple announcement detected by `scripts/check-lineup.ts`.\n\n- Title: %s\n- Published: %s\n- Link: %s\n\nIf this introduces a new Mac model or supersedes an existing one, update:\n\n- `data/lineup.json` — current lineup (and bump `updatedAt`)\n- `data/historical.json` — move retired models here with their original retail prices\n' \
+              "${title}" "${pubDate}" "${link}")
+            gh issue create --title "${issue_title}" --body "${body}"
+            echo "Created issue: ${issue_title}"
+          done

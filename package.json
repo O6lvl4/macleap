@@ -10,7 +10,8 @@
     "dev": "tsx src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check-lineup": "tsx scripts/check-lineup.ts"
   },
   "engines": {
     "node": ">=20"

@@ -11,6 +11,7 @@ JP-only for now (prices in JPY, calibrated against Apple Japan + local buyback s
 - [x] Estimate trade-in value via depreciation model
 - [x] `plan` subcommand: net upgrade cost in one shot
 - [x] Color output, tables, spinners, `--json` mode
+- [x] Weekly GitHub Action that scans Apple Newsroom and opens an issue when new Mac models are announced
 - [ ] Live trade-in lookup (Apple Trade In + 3rd-party buyback)
 
 ## Quickstart
@@ -86,6 +87,18 @@ Equal-or-better current models — net upgrade cost (within ¥400,000)
 - [`data/tradein-model.json`](./data/tradein-model.json) — depreciation rates and channel/condition multipliers.
 
 Update on Apple announcements. Trade-in estimates calibrated against Apple Trade In + Iosys / Amemoba listings (2026-04).
+
+### Stale-data monitor
+
+A weekly GitHub Action ([`.github/workflows/check-lineup.yml`](.github/workflows/check-lineup.yml)) scans the
+Apple Japan Newsroom Atom feed for Mac-related announcements published after `data/lineup.json#updatedAt`,
+and opens a deduplicated issue for each one — your cue to refresh the data files.
+
+Run the same scan locally:
+
+```sh
+npm run check-lineup
+```
 
 ## License
 
