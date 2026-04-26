@@ -1,14 +1,12 @@
-import { readFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
-import { dirname, resolve } from "node:path";
-import type { ConfigSpec, MacModel } from "./lineup.js";
+import type { ConfigSpec, MacModel } from "../catalog/mac-model.js";
+import { money, scaleMoney, type Money } from "../market/money.js";
 
 export interface ChannelDef {
   label: string;
   multiplier: number;
 }
 
-export interface TradeinModel {
+export interface DepreciationModel {
   initialResidualRate: number;
   monthlyDecayRate: number;
   channels: Record<string, ChannelDef>;
@@ -20,14 +18,7 @@ export interface TradeinEstimate {
   channelLabel: string;
   condition: string;
   conditionLabel: string;
-  amountJPY: number;
-}
-
-export async function loadTradeinModel(): Promise<TradeinModel> {
-  const here = dirname(fileURLToPath(import.meta.url));
-  const dataPath = resolve(here, "..", "data", "tradein-model.json");
-  const raw = await readFile(dataPath, "utf-8");
-  return JSON.parse(raw) as TradeinModel;
+  amount: Money;
 }
 
 function monthsBetween(from: { year: number; month: number }, to: Date): number {
@@ -36,21 +27,21 @@ function monthsBetween(from: { year: number; month: number }, to: Date): number 
   return Math.max(0, toMonths - fromMonths);
 }
 
-function roundToThousand(amount: number): number {
-  return Math.round(amount / 1000) * 1000;
+function roundMoneyToThousand(m: Money): Money {
+  return money(Math.round(m.amount / 1000) * 1000, m.currency);
 }
 
-export function estimateTradeIn(
+export function estimateTradein(
   model: MacModel,
   config: ConfigSpec,
-  tradeinModel: TradeinModel,
+  depreciation: DepreciationModel,
   options: { condition?: string; asOf?: Date } = {},
 ): TradeinEstimate[] {
   const condition = options.condition ?? "asNew";
-  const conditionDef = tradeinModel.conditions[condition];
+  const conditionDef = depreciation.conditions[condition];
   if (!conditionDef) {
     throw new Error(
-      `Unknown condition: ${condition}. Available: ${Object.keys(tradeinModel.conditions).join(", ")}`,
+      `Unknown condition: ${condition}. Available: ${Object.keys(depreciation.conditions).join(", ")}`,
     );
   }
 
@@ -59,20 +50,18 @@ export function estimateTradeIn(
     { year: model.releaseYear, month: model.releaseMonth },
     asOf,
   );
-
-  const baseValue =
-    config.priceJPY *
-    tradeinModel.initialResidualRate *
-    Math.pow(tradeinModel.monthlyDecayRate, months);
+  const baseFactor =
+    depreciation.initialResidualRate * Math.pow(depreciation.monthlyDecayRate, months);
 
   const estimates: TradeinEstimate[] = [];
-  for (const [channel, channelDef] of Object.entries(tradeinModel.channels)) {
+  for (const [channel, channelDef] of Object.entries(depreciation.channels)) {
+    const factor = baseFactor * channelDef.multiplier * conditionDef.multiplier;
     estimates.push({
       channel,
       channelLabel: channelDef.label,
       condition,
       conditionLabel: conditionDef.label,
-      amountJPY: roundToThousand(baseValue * channelDef.multiplier * conditionDef.multiplier),
+      amount: roundMoneyToThousand(scaleMoney(config.price, factor)),
     });
   }
   return estimates;
@@ -80,5 +69,5 @@ export function estimateTradeIn(
 
 export function bestEstimate(estimates: TradeinEstimate[]): TradeinEstimate | null {
   if (estimates.length === 0) return null;
-  return estimates.reduce((best, e) => (e.amountJPY > best.amountJPY ? e : best));
+  return estimates.reduce((best, e) => (e.amount.amount > best.amount.amount ? e : best));
 }

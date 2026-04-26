@@ -1,14 +1,11 @@
-import { readFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
-import { dirname, resolve } from "node:path";
-import type { ConfigSpec, Lineup, MacModel } from "./lineup.js";
-import type { CurrentMacBaseline } from "./match.js";
+import type { RegionCode } from "../market/region.js";
+import type { CurrentMacBaseline, MacModel, ConfigSpec } from "./mac-model.js";
 
-export async function loadHistorical(): Promise<Lineup> {
-  const here = dirname(fileURLToPath(import.meta.url));
-  const dataPath = resolve(here, "..", "data", "historical.json");
-  const raw = await readFile(dataPath, "utf-8");
-  return JSON.parse(raw) as Lineup;
+export interface Catalog {
+  region: RegionCode;
+  updatedAt: string;
+  current: MacModel[];
+  historical: MacModel[];
 }
 
 export interface OriginalMatch {
@@ -19,9 +16,9 @@ export interface OriginalMatch {
 
 export function findOriginal(
   baseline: CurrentMacBaseline,
-  historical: Lineup,
+  catalog: Catalog,
 ): OriginalMatch | null {
-  const candidates = historical.models.filter(
+  const candidates = catalog.historical.filter(
     (m) =>
       m.family === baseline.family &&
       m.screenSizeInch === baseline.screenSizeInch &&

@@ -1,33 +1,21 @@
-import type { ChipSpec, ConfigSpec, Family, Lineup, MacModel } from "./lineup.js";
-import { chipLabel, chipScore } from "./lineup.js";
+import { chipLabel, chipScore } from "../catalog/chip.js";
+import type { CurrentMacBaseline, ConfigSpec, MacModel } from "../catalog/mac-model.js";
 
-export interface CurrentMacBaseline {
-  family: Family;
-  screenSizeInch: number;
-  chip: ChipSpec;
-  memoryGB: number;
-  storageGB: number;
-}
-
-export interface Suggestion {
-  model: MacModel;
-  config: ConfigSpec;
-  reasons: string[];
-  upgradeScore: number;
-}
-
-export interface SuggestOptions {
-  budgetJPY?: number;
+export interface MatchOptions {
   allowSmallerScreen?: boolean;
-  maxResults?: number;
+}
+
+export interface MatchResult {
+  ok: boolean;
+  reasons: string[];
 }
 
 export function isEqualOrBetter(
   current: CurrentMacBaseline,
   model: MacModel,
   config: ConfigSpec,
-  options: { allowSmallerScreen?: boolean } = {},
-): { ok: boolean; reasons: string[] } {
+  options: MatchOptions = {},
+): MatchResult {
   const reasons: string[] = [];
 
   const currentScore = chipScore(current.chip);
@@ -68,7 +56,7 @@ export function isEqualOrBetter(
   return { ok: true, reasons };
 }
 
-function upgradeScore(
+export function upgradeScore(
   current: CurrentMacBaseline,
   model: MacModel,
   config: ConfigSpec,
@@ -78,38 +66,4 @@ function upgradeScore(
   const storageDelta = (config.storageGB - current.storageGB) / 256;
   const screenDelta = model.screenSizeInch - current.screenSizeInch;
   return chipDelta * 5 + memDelta * 2 + storageDelta * 1 + screenDelta * 3;
-}
-
-export function suggest(
-  current: CurrentMacBaseline,
-  lineup: Lineup,
-  options: SuggestOptions = {},
-): Suggestion[] {
-  const results: Suggestion[] = [];
-
-  for (const model of lineup.models) {
-    for (const config of model.configs) {
-      if (options.budgetJPY !== undefined && config.priceJPY > options.budgetJPY) continue;
-      const check = isEqualOrBetter(current, model, config, {
-        allowSmallerScreen: options.allowSmallerScreen,
-      });
-      if (!check.ok) continue;
-      results.push({
-        model,
-        config,
-        reasons: check.reasons,
-        upgradeScore: upgradeScore(current, model, config),
-      });
-    }
-  }
-
-  results.sort((a, b) => {
-    if (a.config.priceJPY !== b.config.priceJPY) return a.config.priceJPY - b.config.priceJPY;
-    return b.upgradeScore - a.upgradeScore;
-  });
-
-  if (options.maxResults !== undefined) {
-    return results.slice(0, options.maxResults);
-  }
-  return results;
 }

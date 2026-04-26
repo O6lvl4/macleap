@@ -2,7 +2,9 @@
 
 Detect your Mac, find equal-or-better current models on sale, and estimate the real upgrade cost after trade-in.
 
-JP-only for now (prices in JPY, calibrated against Apple Japan + local buyback sites).
+JP-only data for now (prices in JPY, calibrated against Apple Japan + local buyback sites).
+The internal architecture is region-parameterized from the ground up — adding a new region
+is a JSON-only change, no code edits required. See [docs/architecture.md](./docs/architecture.md).
 
 ## Status
 
@@ -36,8 +38,9 @@ macleap tradein [options]        Estimate trade-in value for current Mac
 macleap plan [options]           Combined: suggest + trade-in with net upgrade cost
 
 Options:
-  -b, --budget <yen>             Maximum price (e.g. 400000)
+  -b, --budget <amount>          Maximum price (in region currency, e.g. 400000)
   -c, --condition <state>        Condition: asNew | good | fair (default: asNew)
+  --region <code>                Market region (default: jp)
   --allow-smaller-screen         Allow smaller screens in suggestions
   --limit <n>                    Limit results (default: 10)
   --all                          Show all matches
@@ -82,9 +85,13 @@ Equal-or-better current models — net upgrade cost (within ¥400,000)
 
 ## Data
 
-- [`data/lineup.json`](./data/lineup.json) — current Mac lineup (price, configs).
-- [`data/historical.json`](./data/historical.json) — past Macs with original retail prices.
-- [`data/tradein-model.json`](./data/tradein-model.json) — depreciation rates and channel/condition multipliers.
+Data is split per region under `data/regions/<region-code>/`:
+
+- `lineup.json` — current Mac lineup (price, configs)
+- `historical.json` — past Macs with original retail prices
+- `tradein-model.json` — depreciation rates and channel/condition multipliers
+
+Currently shipped: `jp` ([data/regions/jp/](./data/regions/jp/)).
 
 Update on Apple announcements. Trade-in estimates calibrated against Apple Trade In + Iosys / Amemoba listings (2026-04).
 
@@ -98,6 +105,23 @@ Run the same scan locally:
 
 ```sh
 npm run check-lineup
+```
+
+## Architecture
+
+Hexagonal: `domain` (pure) ← `application` (use cases + ports) ← `infrastructure` (adapters)
+and `presentation` (CLI). Layer boundaries enforced by `dependency-cruiser` (`npm run lint:arch`).
+Domain is pure, region-parameterized, and unit-tested with Vitest.
+
+See [docs/architecture.md](./docs/architecture.md) for the full layout and how to add a new region.
+
+## Development
+
+```sh
+npm test           # Vitest (domain + application unit tests)
+npm run typecheck  # tsc --noEmit
+npm run lint:arch  # dependency-cruiser layer enforcement
+npm run build      # tsc emit to dist/
 ```
 
 ## License

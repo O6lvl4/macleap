@@ -45,7 +45,8 @@ function isMacRelated(title: string): boolean {
 }
 
 async function main(): Promise<void> {
-  const lineupRaw = await readFile("data/lineup.json", "utf-8");
+  const region = process.env.REGION ?? "jp";
+  const lineupRaw = await readFile(`data/regions/${region}/lineup.json`, "utf-8");
   const lineup = JSON.parse(lineupRaw) as { updatedAt: string };
   const since = new Date(lineup.updatedAt).getTime();
 
