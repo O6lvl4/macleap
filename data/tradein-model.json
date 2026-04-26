@@ -1,0 +1,15 @@
+{
+  "$comment": "Trade-in price model. Estimates depreciate from a fraction of original retail using monthly decay. Calibrated against Apple Trade In + Iosys/Amemoba listings (2026-04).",
+  "initialResidualRate": 0.75,
+  "monthlyDecayRate": 0.995,
+  "channels": {
+    "appleTradeIn": { "label": "Apple Trade In", "multiplier": 0.75 },
+    "privateMedian": { "label": "Private (median)", "multiplier": 0.85 },
+    "privateHigh": { "label": "Private (best)", "multiplier": 1.0 }
+  },
+  "conditions": {
+    "asNew": { "label": "As-new", "multiplier": 1.0 },
+    "good": { "label": "Good", "multiplier": 0.88 },
+    "fair": { "label": "Fair", "multiplier": 0.7 }
+  }
+}

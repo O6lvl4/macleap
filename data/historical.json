@@ -1,0 +1,153 @@
+{
+  "$comment": "Past Mac models with original retail prices, used to estimate trade-in value.",
+  "currency": "JPY",
+  "region": "JP",
+  "updatedAt": "2026-04-26",
+  "models": [
+    {
+      "id": "macbook-air-13-m1",
+      "family": "MacBook Air",
+      "screenSizeInch": 13,
+      "chip": { "family": "M", "generation": 1, "variant": "" },
+      "releaseYear": 2020,
+      "releaseMonth": 11,
+      "configs": [
+        { "memoryGB": 8, "storageGB": 256, "cpuCores": 8, "gpuCores": 7, "priceJPY": 115280, "isStandard": true },
+        { "memoryGB": 8, "storageGB": 512, "cpuCores": 8, "gpuCores": 8, "priceJPY": 142780, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 512, "cpuCores": 8, "gpuCores": 8, "priceJPY": 164780, "isStandard": true }
+      ]
+    },
+    {
+      "id": "macbook-air-13-m2",
+      "family": "MacBook Air",
+      "screenSizeInch": 13,
+      "chip": { "family": "M", "generation": 2, "variant": "" },
+      "releaseYear": 2022,
+      "releaseMonth": 7,
+      "configs": [
+        { "memoryGB": 8, "storageGB": 256, "cpuCores": 8, "gpuCores": 8, "priceJPY": 164800, "isStandard": true },
+        { "memoryGB": 8, "storageGB": 512, "cpuCores": 8, "gpuCores": 10, "priceJPY": 184800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 256, "cpuCores": 8, "gpuCores": 8, "priceJPY": 192800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 512, "cpuCores": 8, "gpuCores": 10, "priceJPY": 212800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 1024, "cpuCores": 8, "gpuCores": 10, "priceJPY": 242800, "isStandard": true },
+        { "memoryGB": 24, "storageGB": 512, "cpuCores": 8, "gpuCores": 10, "priceJPY": 240800, "isStandard": true },
+        { "memoryGB": 24, "storageGB": 1024, "cpuCores": 8, "gpuCores": 10, "priceJPY": 270800, "isStandard": true }
+      ]
+    },
+    {
+      "id": "macbook-air-15-m2",
+      "family": "MacBook Air",
+      "screenSizeInch": 15,
+      "chip": { "family": "M", "generation": 2, "variant": "" },
+      "releaseYear": 2023,
+      "releaseMonth": 6,
+      "configs": [
+        { "memoryGB": 8, "storageGB": 256, "cpuCores": 8, "gpuCores": 10, "priceJPY": 198800, "isStandard": true },
+        { "memoryGB": 8, "storageGB": 512, "cpuCores": 8, "gpuCores": 10, "priceJPY": 228800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 512, "cpuCores": 8, "gpuCores": 10, "priceJPY": 256800, "isStandard": true }
+      ]
+    },
+    {
+      "id": "macbook-air-13-m3",
+      "family": "MacBook Air",
+      "screenSizeInch": 13,
+      "chip": { "family": "M", "generation": 3, "variant": "" },
+      "releaseYear": 2024,
+      "releaseMonth": 3,
+      "configs": [
+        { "memoryGB": 8, "storageGB": 256, "cpuCores": 8, "gpuCores": 8, "priceJPY": 164800, "isStandard": true },
+        { "memoryGB": 8, "storageGB": 512, "cpuCores": 8, "gpuCores": 10, "priceJPY": 184800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 512, "cpuCores": 8, "gpuCores": 10, "priceJPY": 212800, "isStandard": true },
+        { "memoryGB": 24, "storageGB": 512, "cpuCores": 8, "gpuCores": 10, "priceJPY": 240800, "isStandard": true }
+      ]
+    },
+    {
+      "id": "macbook-air-15-m3",
+      "family": "MacBook Air",
+      "screenSizeInch": 15,
+      "chip": { "family": "M", "generation": 3, "variant": "" },
+      "releaseYear": 2024,
+      "releaseMonth": 3,
+      "configs": [
+        { "memoryGB": 8, "storageGB": 256, "cpuCores": 8, "gpuCores": 10, "priceJPY": 198800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 512, "cpuCores": 8, "gpuCores": 10, "priceJPY": 256800, "isStandard": true }
+      ]
+    },
+    {
+      "id": "macbook-pro-14-m1-pro",
+      "family": "MacBook Pro",
+      "screenSizeInch": 14,
+      "chip": { "family": "M", "generation": 1, "variant": "Pro" },
+      "releaseYear": 2021,
+      "releaseMonth": 10,
+      "configs": [
+        { "memoryGB": 16, "storageGB": 512, "cpuCores": 8, "gpuCores": 14, "priceJPY": 274800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 1024, "cpuCores": 10, "gpuCores": 16, "priceJPY": 329800, "isStandard": true }
+      ]
+    },
+    {
+      "id": "macbook-pro-14-m2-pro",
+      "family": "MacBook Pro",
+      "screenSizeInch": 14,
+      "chip": { "family": "M", "generation": 2, "variant": "Pro" },
+      "releaseYear": 2023,
+      "releaseMonth": 1,
+      "configs": [
+        { "memoryGB": 16, "storageGB": 512, "cpuCores": 10, "gpuCores": 16, "priceJPY": 288800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 1024, "cpuCores": 12, "gpuCores": 19, "priceJPY": 348800, "isStandard": true }
+      ]
+    },
+    {
+      "id": "macbook-pro-14-m3",
+      "family": "MacBook Pro",
+      "screenSizeInch": 14,
+      "chip": { "family": "M", "generation": 3, "variant": "" },
+      "releaseYear": 2023,
+      "releaseMonth": 11,
+      "configs": [
+        { "memoryGB": 8, "storageGB": 512, "cpuCores": 8, "gpuCores": 10, "priceJPY": 248800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 512, "cpuCores": 8, "gpuCores": 10, "priceJPY": 278800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 1024, "cpuCores": 8, "gpuCores": 10, "priceJPY": 308800, "isStandard": true },
+        { "memoryGB": 24, "storageGB": 512, "cpuCores": 8, "gpuCores": 10, "priceJPY": 308800, "isStandard": true },
+        { "memoryGB": 24, "storageGB": 1024, "cpuCores": 8, "gpuCores": 10, "priceJPY": 338800, "isStandard": true }
+      ]
+    },
+    {
+      "id": "macbook-pro-14-m3-pro",
+      "family": "MacBook Pro",
+      "screenSizeInch": 14,
+      "chip": { "family": "M", "generation": 3, "variant": "Pro" },
+      "releaseYear": 2023,
+      "releaseMonth": 11,
+      "configs": [
+        { "memoryGB": 18, "storageGB": 512, "cpuCores": 11, "gpuCores": 14, "priceJPY": 328800, "isStandard": true },
+        { "memoryGB": 18, "storageGB": 1024, "cpuCores": 12, "gpuCores": 18, "priceJPY": 398800, "isStandard": true }
+      ]
+    },
+    {
+      "id": "macbook-pro-14-m4",
+      "family": "MacBook Pro",
+      "screenSizeInch": 14,
+      "chip": { "family": "M", "generation": 4, "variant": "" },
+      "releaseYear": 2024,
+      "releaseMonth": 11,
+      "configs": [
+        { "memoryGB": 16, "storageGB": 512, "cpuCores": 10, "gpuCores": 10, "priceJPY": 248800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 1024, "cpuCores": 10, "gpuCores": 10, "priceJPY": 278800, "isStandard": true },
+        { "memoryGB": 24, "storageGB": 1024, "cpuCores": 10, "gpuCores": 10, "priceJPY": 308800, "isStandard": true }
+      ]
+    },
+    {
+      "id": "macbook-pro-14-m4-pro",
+      "family": "MacBook Pro",
+      "screenSizeInch": 14,
+      "chip": { "family": "M", "generation": 4, "variant": "Pro" },
+      "releaseYear": 2024,
+      "releaseMonth": 11,
+      "configs": [
+        { "memoryGB": 24, "storageGB": 512, "cpuCores": 12, "gpuCores": 16, "priceJPY": 328800, "isStandard": true },
+        { "memoryGB": 24, "storageGB": 1024, "cpuCores": 14, "gpuCores": 20, "priceJPY": 398800, "isStandard": true }
+      ]
+    }
+  ]
+}
