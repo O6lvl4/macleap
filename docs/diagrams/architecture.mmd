@@ -1,0 +1,38 @@
+flowchart TB
+    Root["src/index.ts<br/>Composition Root"]
+
+    subgraph Presentation["Presentation — CLI"]
+        P1["commands/<br/>detect • suggest • tradein • plan"]
+        P2["format/<br/>mac-block • money • tables • text"]
+        P3["router.ts<br/>commander wiring"]
+    end
+
+    subgraph Application["Application"]
+        A1["use-cases/<br/>detectMac • suggestUpgrades<br/>estimateTradein • planUpgrade"]
+        A2["ports.ts<br/>MacDetector • CatalogRepository<br/>DepreciationModelRepository<br/>RegionResolver"]
+    end
+
+    subgraph Domain["Domain — pure"]
+        D1["market<br/>MarketRegion • Money"]
+        D2["catalog<br/>MacModel • Chip • findOriginal"]
+        D3["pricing<br/>DepreciationModel • estimateTradein"]
+        D4["upgrade<br/>isEqualOrBetter • suggest"]
+    end
+
+    subgraph Infrastructure["Infrastructure — adapters"]
+        I1["SystemProfilerDetector"]
+        I2["JsonCatalogRepository"]
+        I3["JsonDepreciationRepository"]
+        I4["StaticRegionResolver"]
+    end
+
+    subgraph Shared["Shared"]
+        S1["Brand • Result"]
+    end
+
+    Root --> Presentation
+    Root --> Infrastructure
+    Presentation --> Application
+    Infrastructure -.implements.-> A2
+    Application --> Domain
+    Domain --> Shared

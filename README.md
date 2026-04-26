@@ -114,7 +114,10 @@ Hexagonal: `domain` (pure) ← `application` (use cases + ports) ← `infrastruc
 and `presentation` (CLI). Layer boundaries enforced by `dependency-cruiser` (`npm run lint:arch`).
 Domain is pure, region-parameterized, and unit-tested with Vitest.
 
-See [docs/architecture.md](./docs/architecture.md) for the full layout and how to add a new region.
+![Architecture overview](./docs/diagrams/architecture.png)
+
+See [docs/architecture.md](./docs/architecture.md) for the full layout, the `plan` command
+sequence diagram, and how to add a new region.
 
 ## Development
 

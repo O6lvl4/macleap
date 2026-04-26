@@ -1,0 +1,27 @@
+sequenceDiagram
+    actor User
+    participant CLI as CLI Router
+    participant UC as planUpgrade UseCase
+    participant Det as MacDetector
+    participant Cat as CatalogRepository
+    participant Dep as DepreciationRepository
+    participant Dom as Domain (pure)
+
+    User->>CLI: macleap plan -b 400000
+    CLI->>UC: planUpgrade(deps, input)
+    UC->>Det: detect()
+    Det-->>UC: DetectedMac
+    UC->>Det: toBaseline(detected)
+    Det-->>UC: CurrentMacBaseline
+    UC->>Cat: load(region.code)
+    Cat-->>UC: Catalog
+    UC->>Dom: findOriginal(baseline, catalog)
+    Dom-->>UC: OriginalMatch
+    UC->>Dep: load(region.code)
+    Dep-->>UC: DepreciationModel
+    UC->>Dom: estimateTradein(model, config, depreciation)
+    Dom-->>UC: TradeinEstimate[]
+    UC->>Dom: suggest(baseline, catalog, options)
+    Dom-->>UC: Suggestion[]
+    UC-->>CLI: PlanUpgradeResult
+    CLI-->>User: Tables + net cost

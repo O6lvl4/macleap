@@ -3,6 +3,8 @@
 `macleap` follows a hexagonal (ports-and-adapters) layout. Layer boundaries are
 machine-enforced by [`dependency-cruiser`](../.dependency-cruiser.cjs).
 
+![Architecture overview](./diagrams/architecture.png)
+
 ```
 src/
 ├── shared/         # brand types, Result — zero deps
@@ -47,6 +49,13 @@ root in `src/index.ts` is the only place that knows about `SystemProfilerDetecto
 backends.
 
 Run `npm run lint:arch` to verify.
+
+## Plan command flow
+
+How `macleap plan` orchestrates detection, catalog/depreciation lookup, and the
+domain-only scoring step:
+
+![Plan command sequence](./diagrams/plan-flow.png)
 
 ## Multi-region support
 
