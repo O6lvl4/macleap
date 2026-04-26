@@ -9,7 +9,7 @@ is a JSON-only change, no code edits required. See [docs/architecture.md](./docs
 ## Status
 
 - [x] Detect current Mac via `system_profiler`
-- [x] Match against current Mac lineup (`data/lineup.json`)
+- [x] Match against current Mac lineup (`data/regions/<region>/lineup.json`)
 - [x] Estimate trade-in value via depreciation model
 - [x] `plan` subcommand: net upgrade cost in one shot
 - [x] Color output, tables, spinners, `--json` mode
@@ -98,8 +98,9 @@ Update on Apple announcements. Trade-in estimates calibrated against Apple Trade
 ### Stale-data monitor
 
 A weekly GitHub Action ([`.github/workflows/check-lineup.yml`](.github/workflows/check-lineup.yml)) scans the
-Apple Japan Newsroom Atom feed for Mac-related announcements published after `data/lineup.json#updatedAt`,
-and opens a deduplicated issue for each one — your cue to refresh the data files.
+Apple Japan Newsroom Atom feed for Mac-related announcements published after
+`data/regions/jp/lineup.json#updatedAt`, and opens a deduplicated issue for each one — your cue to refresh
+the data files.
 
 Run the same scan locally:
 
