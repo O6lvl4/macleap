@@ -124,6 +124,77 @@
       "configs": [
         { "memoryGB": 36, "storageGB": 2048, "cpuCores": 16, "gpuCores": 40, "priceJPY": 649800, "isStandard": true }
       ]
+    },
+    {
+      "id": "mac-mini-m4",
+      "family": "Mac mini",
+      "screenSizeInch": 0,
+      "chip": { "family": "M", "generation": 4, "variant": "" },
+      "releaseYear": 2024,
+      "releaseMonth": 11,
+      "configs": [
+        { "memoryGB": 16, "storageGB": 256, "cpuCores": 10, "gpuCores": 10, "priceJPY": 94800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 512, "cpuCores": 10, "gpuCores": 10, "priceJPY": 124800, "isStandard": true },
+        { "memoryGB": 24, "storageGB": 512, "cpuCores": 10, "gpuCores": 10, "priceJPY": 154800, "isStandard": true },
+        { "memoryGB": 32, "storageGB": 1024, "cpuCores": 10, "gpuCores": 10, "priceJPY": 214800, "isStandard": false }
+      ]
+    },
+    {
+      "id": "mac-mini-m4-pro",
+      "family": "Mac mini",
+      "screenSizeInch": 0,
+      "chip": { "family": "M", "generation": 4, "variant": "Pro" },
+      "releaseYear": 2024,
+      "releaseMonth": 11,
+      "configs": [
+        { "memoryGB": 24, "storageGB": 512, "cpuCores": 12, "gpuCores": 16, "priceJPY": 218800, "isStandard": true },
+        { "memoryGB": 24, "storageGB": 1024, "cpuCores": 12, "gpuCores": 16, "priceJPY": 248800, "isStandard": true },
+        { "memoryGB": 48, "storageGB": 512, "cpuCores": 12, "gpuCores": 16, "priceJPY": 278800, "isStandard": false },
+        { "memoryGB": 48, "storageGB": 1024, "cpuCores": 12, "gpuCores": 16, "priceJPY": 308800, "isStandard": false },
+        { "memoryGB": 48, "storageGB": 1024, "cpuCores": 14, "gpuCores": 20, "priceJPY": 338800, "isStandard": false }
+      ]
+    },
+    {
+      "id": "imac-24-m4",
+      "family": "iMac",
+      "screenSizeInch": 24,
+      "chip": { "family": "M", "generation": 4, "variant": "" },
+      "releaseYear": 2024,
+      "releaseMonth": 11,
+      "configs": [
+        { "memoryGB": 16, "storageGB": 256, "cpuCores": 8, "gpuCores": 8, "priceJPY": 198800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 256, "cpuCores": 10, "gpuCores": 10, "priceJPY": 234800, "isStandard": true },
+        { "memoryGB": 16, "storageGB": 512, "cpuCores": 10, "gpuCores": 10, "priceJPY": 264800, "isStandard": true },
+        { "memoryGB": 24, "storageGB": 512, "cpuCores": 10, "gpuCores": 10, "priceJPY": 294800, "isStandard": true },
+        { "memoryGB": 32, "storageGB": 1024, "cpuCores": 10, "gpuCores": 10, "priceJPY": 354800, "isStandard": false },
+        { "memoryGB": 32, "storageGB": 2048, "cpuCores": 10, "gpuCores": 10, "priceJPY": 414800, "isStandard": false }
+      ]
+    },
+    {
+      "id": "mac-studio-m4-max",
+      "family": "Mac Studio",
+      "screenSizeInch": 0,
+      "chip": { "family": "M", "generation": 4, "variant": "Max" },
+      "releaseYear": 2025,
+      "releaseMonth": 3,
+      "configs": [
+        { "memoryGB": 36, "storageGB": 512, "cpuCores": 14, "gpuCores": 32, "priceJPY": 328800, "isStandard": true },
+        { "memoryGB": 36, "storageGB": 1024, "cpuCores": 14, "gpuCores": 32, "priceJPY": 358800, "isStandard": true },
+        { "memoryGB": 48, "storageGB": 512, "cpuCores": 16, "gpuCores": 40, "priceJPY": 433800, "isStandard": true },
+        { "memoryGB": 48, "storageGB": 1024, "cpuCores": 16, "gpuCores": 40, "priceJPY": 463800, "isStandard": true }
+      ]
+    },
+    {
+      "id": "mac-studio-m3-ultra",
+      "family": "Mac Studio",
+      "screenSizeInch": 0,
+      "chip": { "family": "M", "generation": 3, "variant": "Ultra" },
+      "releaseYear": 2025,
+      "releaseMonth": 3,
+      "configs": [
+        { "memoryGB": 96, "storageGB": 1024, "cpuCores": 28, "gpuCores": 60, "priceJPY": 668800, "isStandard": true },
+        { "memoryGB": 96, "storageGB": 1024, "cpuCores": 32, "gpuCores": 80, "priceJPY": 893800, "isStandard": true }
+      ]
     }
   ]
 }
