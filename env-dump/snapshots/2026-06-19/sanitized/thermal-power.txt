@@ -1,0 +1,35 @@
+## pmset -g therm
+Note: No thermal warning level has been recorded
+Note: No performance warning level has been recorded
+2026-06-19 13:25:50 +0900 CPU Power notify
+	CPU_Scheduler_Limit 	= 100
+	CPU_Available_CPUs 	= 8
+	CPU_Speed_Limit 	= 100
+
+## pmset -g
+System-wide power settings:
+Currently in use:
+ Sleep On Power Button 1
+ autopoweroff         1
+ standbydelayhigh     86400
+ autopoweroffdelay    259200
+ proximitywake        1
+ standby              1
+ standbydelaylow      86400
+ ttyskeepawake        1
+ hibernatemode        0
+ powernap             1
+ gpuswitch            2
+ hibernatefile        /var/vm/sleepimage
+ highstandbythreshold 50
+ displaysleep         10
+ womp                 1
+ networkoversleep     0
+ sleep                0 (sleep prevented by caffeinate, caffeinate)
+ tcpkeepalive         1
+ halfdim              1
+ autorestart          1
+ disksleep            10
+
+## battery
+Now drawing from 'AC Power'

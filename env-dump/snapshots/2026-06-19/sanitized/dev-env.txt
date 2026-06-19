@@ -1,0 +1,18 @@
+node     v22.9.0
+npm      10.8.3
+go       flag provided but not defined: -version
+rustc    rustc 1.95.0 (59807616e 2026-04-14)
+cargo    cargo 1.95.0 (f2d3ce0bd 2026-03-21)
+python3  Python 3.11.15
+docker   Docker version 28.3.2, build 578ccf6
+
+## xcode
+/Applications/Xcode14.3.1.app/Contents/Developer
+Xcode 14.3.1
+Build version 14E300c
+
+## brew formula count
+     118
+
+## docker running
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES

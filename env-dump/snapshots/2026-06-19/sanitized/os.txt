@@ -1,0 +1,10 @@
+## sw_vers
+ProductName:		macOS
+ProductVersion:		13.7.8
+BuildVersion:		22H730
+
+## uptime
+13:25  up  1:43, 5 users, load averages: 3.21 2.75 2.46
+
+## boottime
+kern.boottime: { sec = 1781836959, usec = 837100 } Fri Jun 19 11:42:39 2026

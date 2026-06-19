@@ -1,0 +1,59 @@
+## hw.memsize
+hw.memsize: 34359738368
+
+## vm.swapusage
+vm.swapusage: total = 0.00M  used = 0.00M  free = 0.00M  (encrypted)
+
+## vm_stat
+Mach Virtual Memory Statistics: (page size of 4096 bytes)
+Pages free:                             2040594.
+Pages active:                           2768706.
+Pages inactive:                         2286856.
+Pages speculative:                       530757.
+Pages throttled:                              0.
+Pages wired down:                        761232.
+Pages purgeable:                          41696.
+"Translation faults":                  90890230.
+Pages copy-on-write:                    8392517.
+Pages zero filled:                     38327173.
+Pages reactivated:                        17973.
+Pages purged:                             38406.
+File-backed pages:                      2755932.
+Anonymous pages:                        2830387.
+Pages stored in compressor:                   0.
+Pages occupied by compressor:                 0.
+Decompressions:                               0.
+Compressions:                                 0.
+Pageins:                                2327655.
+Pageouts:                                     0.
+Swapins:                                      0.
+Swapouts:                                     0.
+
+## SPMemoryDataType
+Memory:
+
+    Memory Slots:
+
+      ECC: Disabled
+      Upgradeable Memory: Yes
+
+        BANK 0/DIMM0:
+
+          Size: 16 GB
+          Type: DDR4 SO-DIMM
+          Speed: 2400 MHz
+          Status: OK
+          Manufacturer: 0x80AD
+          Part Number: 0x484D413832475336414652384E2D554820202020
+          Serial Number: 0x43191216
+
+        BANK 1/DIMM0:
+
+          Size: 16 GB
+          Type: DDR4 SO-DIMM
+          Speed: 2400 MHz
+          Status: OK
+          Manufacturer: 0x80AD
+          Part Number: 0x484D413832475336414652384E2D554820202020
+          Serial Number: 0x43191216
+

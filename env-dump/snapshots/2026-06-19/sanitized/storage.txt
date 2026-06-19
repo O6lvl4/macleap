@@ -1,0 +1,91 @@
+## df -h
+Filesystem                Size   Used  Avail Capacity iused      ifree %iused  Mounted on
+/dev/disk1s4s1           637Gi  8.7Gi  196Gi     5%  356882 2050374320    0%   /
+devfs                    191Ki  191Ki    0Bi   100%     662          0  100%   /dev
+/dev/disk1s2             637Gi  2.0Gi  196Gi     2%     990 2050374320    0%   /System/Volumes/Preboot
+/dev/disk1s7             637Gi  1.0Mi  196Gi     1%       1 2050374320    0%   /System/Volumes/VM
+/dev/disk1s6             637Gi   11Mi  196Gi     1%      21 2050374320    0%   /System/Volumes/Update
+/dev/disk1s5             637Gi  429Gi  196Gi    69% 4830749 2050374320    0%   /System/Volumes/Data
+ntfs://disk0s3/BOOTCAMP  295Gi   47Gi  247Gi    17%       1          0  100%   /Volumes/BOOTCAMP
+/dev/disk1s1             637Gi  652Ki  196Gi     1%      95 2050374320    0%   /Volumes/Macintosh HD - Data
+map auto_home              0Bi    0Bi    0Bi   100%       0          0  100%   /System/Volumes/Data/home
+
+## SPStorageDataType
+Storage:
+
+    BOOTCAMP:
+
+      Free: 265.61 GB (265,608,368,128 bytes)
+      Capacity: 316.24 GB (316,240,031,744 bytes)
+      Mount Point: /Volumes/BOOTCAMP
+      File System: NTFS
+      Writable: No
+      Ignore Ownership: Yes
+      BSD Name: disk0s3
+      Volume UUID: 8ED67792-A092-4689-BB9A-94C7F7BBA73D
+      Physical Drive:
+          Device Name: APPLE SSD SM1024L
+          Media Name: APPLE SSD SM1024L Media
+          Medium Type: SSD
+          Protocol: PCI-Express
+          Internal: Yes
+          Partition Map Type: GPT (GUID Partition Table)
+          S.M.A.R.T. Status: Verified
+
+    Macintosh HD - Data:
+
+      Free: 209.96 GB (209,958,330,368 bytes)
+      Capacity: 684 GB (684,000,780,288 bytes)
+      Mount Point: /Volumes/Macintosh HD - Data
+      File System: APFS
+      Writable: Yes
+      Ignore Ownership: No
+      BSD Name: disk1s1
+      Volume UUID: 379BD328-EF2D-4B97-B99B-6BF819E37493
+      Physical Drive:
+          Device Name: APPLE SSD SM1024L
+          Media Name: AppleAPFSMedia
+          Medium Type: SSD
+          Protocol: PCI-Express
+          Internal: Yes
+          Partition Map Type: Unknown
+          S.M.A.R.T. Status: Verified
+
+    Macintosh HD - Data:
+
+      Free: 209.96 GB (209,958,330,368 bytes)
+      Capacity: 684 GB (684,000,780,288 bytes)
+      Mount Point: /System/Volumes/Data
+      File System: APFS
+      Writable: Yes
+      Ignore Ownership: No
+      BSD Name: disk1s5
+      Volume UUID: 598A550C-5156-48FF-BCDE-4CCBB54C309A
+      Physical Drive:
+          Device Name: APPLE SSD SM1024L
+          Media Name: AppleAPFSMedia
+          Medium Type: SSD
+          Protocol: PCI-Express
+          Internal: Yes
+          Partition Map Type: Unknown
+          S.M.A.R.T. Status: Verified
+
+    Macintosh HD:
+
+      Free: 209.96 GB (209,958,330,368 bytes)
+      Capacity: 684 GB (684,000,780,288 bytes)
+      Mount Point: /
+      File System: APFS
+      Writable: No
+      Ignore Ownership: No
+      BSD Name: disk1s4s1
+      Volume UUID: 6EA05570-0DCA-4621-9A05-A7729957072F
+      Physical Drive:
+          Device Name: APPLE SSD SM1024L
+          Media Name: AppleAPFSMedia
+          Medium Type: SSD
+          Protocol: PCI-Express
+          Internal: Yes
+          Partition Map Type: Unknown
+          S.M.A.R.T. Status: Verified
+
