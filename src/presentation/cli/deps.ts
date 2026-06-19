@@ -2,6 +2,7 @@ import type {
   CatalogRepository,
   DepreciationModelRepository,
   MacDetector,
+  PartsCatalogRepository,
   RegionResolver,
 } from "../../application/ports.js";
 
@@ -13,6 +14,7 @@ export interface IO {
 export interface Deps {
   detector: MacDetector;
   catalogs: CatalogRepository;
+  partsCatalogs: PartsCatalogRepository;
   depreciation: DepreciationModelRepository;
   regions: RegionResolver;
   io: IO;

@@ -7,7 +7,14 @@ import { detectCommand } from "./commands/detect.js";
 import { suggestCommand } from "./commands/suggest.js";
 import { tradeinCommand } from "./commands/tradein.js";
 import { planCommand } from "./commands/plan.js";
-import type { CommonFlags, PlanFlags, SuggestFlags, TradeinFlags } from "./parse.js";
+import { catalogCommand } from "./commands/catalog.js";
+import type {
+  CatalogFlags,
+  CommonFlags,
+  PlanFlags,
+  SuggestFlags,
+  TradeinFlags,
+} from "./parse.js";
 
 async function loadVersion(): Promise<string> {
   const here = dirname(fileURLToPath(import.meta.url));
@@ -63,6 +70,14 @@ export async function run(deps: Deps, argv: string[]): Promise<void> {
     .option("--all", "Show all matches, no limit")
     .action(async (cmdFlags: PlanFlags) => {
       await planCommand(deps, { ...program.opts<CommonFlags>(), ...cmdFlags });
+    });
+
+  program
+    .command("catalog")
+    .description("Show the parts performance catalog with latest prices")
+    .option("--kind <kind>", "Filter by kind (apple-machine|apu|cpu|gpu|machine)")
+    .action(async (cmdFlags: CatalogFlags) => {
+      await catalogCommand(deps, { ...program.opts<CommonFlags>(), ...cmdFlags });
     });
 
   await program.parseAsync(argv, { from: "user" });

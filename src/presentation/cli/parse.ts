@@ -20,6 +20,10 @@ export interface TradeinFlags extends CommonFlags {
 
 export type PlanFlags = SuggestFlags & TradeinFlags;
 
+export interface CatalogFlags extends CommonFlags {
+  kind?: string;
+}
+
 function parseAmount(value: string): number {
   const n = Number.parseInt(value.replace(/[,_]/g, ""), 10);
   if (Number.isNaN(n)) throw new Error(`Invalid budget value: ${value}`);

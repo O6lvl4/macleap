@@ -2,6 +2,7 @@ import type { Catalog } from "../domain/catalog/catalog.js";
 import type { CurrentMacBaseline } from "../domain/catalog/mac-model.js";
 import type { DepreciationModel } from "../domain/pricing/depreciation-model.js";
 import type { MarketRegion, RegionCode } from "../domain/market/region.js";
+import type { PartItem, PriceObservation } from "../domain/catalog/parts-catalog.js";
 
 export interface DetectedMac {
   modelName: string;
@@ -33,4 +34,9 @@ export interface DepreciationModelRepository {
 
 export interface RegionResolver {
   resolve(code: string): MarketRegion;
+}
+
+export interface PartsCatalogRepository {
+  loadItems(): Promise<PartItem[]>;
+  loadPrices(): Promise<PriceObservation[]>;
 }

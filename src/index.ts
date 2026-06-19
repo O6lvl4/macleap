@@ -1,23 +1,27 @@
 #!/usr/bin/env node
-import { JsonCatalogRepository } from "./infrastructure/catalog/json-catalog-repository.js";
+import { run } from "./presentation/cli/router.js";
 import { SystemProfilerDetector } from "./infrastructure/detection/system-profiler.js";
+import { JsonCatalogRepository } from "./infrastructure/catalog/json-catalog-repository.js";
+import { JsonPartsCatalogRepository } from "./infrastructure/catalog/json-parts-catalog-repository.js";
 import { JsonDepreciationRepository } from "./infrastructure/pricing/json-depreciation-repository.js";
 import { StaticRegionResolver } from "./infrastructure/region/static-region-resolver.js";
-import type { Deps } from "./presentation/cli/deps.js";
-import { run } from "./presentation/cli/router.js";
 
-const deps: Deps = {
-  detector: new SystemProfilerDetector(),
-  catalogs: new JsonCatalogRepository(),
-  depreciation: new JsonDepreciationRepository(),
-  regions: new StaticRegionResolver(),
-  io: {
-    out: (text) => process.stdout.write(text),
-    err: (text) => process.stderr.write(text),
-  },
-};
+async function main(): Promise<void> {
+  const deps = {
+    detector: new SystemProfilerDetector(),
+    catalogs: new JsonCatalogRepository(),
+    partsCatalogs: new JsonPartsCatalogRepository(),
+    depreciation: new JsonDepreciationRepository(),
+    regions: new StaticRegionResolver(),
+    io: {
+      out: (text: string) => process.stdout.write(text + "\n"),
+      err: (text: string) => process.stderr.write(text + "\n"),
+    },
+  };
+  await run(deps, process.argv.slice(2));
+}
 
-run(deps, process.argv.slice(2)).catch((err: unknown) => {
-  process.stderr.write(`${err instanceof Error ? err.message : String(err)}\n`);
+main().catch((err) => {
+  console.error(err);
   process.exit(1);
 });
