@@ -1,0 +1,132 @@
+{
+  "$schema": "./schema/items.schema.json",
+  "description": "パーツ/完成機の性能カタログ。Apple完成品もx86パーツも同一の items 抽象に乗せ、kind で区別する。",
+  "designNote": "性能(specs/benchmarks/llm)は時間にほぼ不変なのでここに置く。価格は日次〜週次で変動するため prices.jsonl に分離し、itemId で結合する。各 benchmark には sources[].measuredAt(取得月)を必ず添える。",
+  "kinds": {
+    "apple-machine": "Apple完成品(Mac Studio 等)。部品選択不可の単一ユニット",
+    "apu": "x86 統合APU(CPU+iGPU+大容量ユニファイドメモリ一体)",
+    "cpu": "x86 デスクトップCPU",
+    "gpu": "ディスクリートGPU",
+    "machine": "x86/Linux 完成機。components[] で内蔵パーツの id を参照"
+  },
+  "items": [
+    {
+      "id": "apple-m4-max-16c",
+      "kind": "apple-machine",
+      "name": "Apple M4 Max (16C/40C) — Mac Studio 上位 / 基準",
+      "specs": {
+        "cpuCores": 16,
+        "gpuCores": 40,
+        "memoryGB": 48,
+        "memoryMaxGB": 128,
+        "memoryType": "Unified LPDDR5X",
+        "memBandwidthGBs": 546
+      },
+      "benchmarks": { "geekbench6": { "single": 3986, "multi": 26190 } },
+      "llm": [
+        { "model": "Llama 3.1 70B", "quant": "Q4_K_M", "tokPerSec": 12.5, "note": "48GB統合で実用上限付近" },
+        { "model": "Llama 3.1 8B", "quant": "Q4_K_M", "tokPerSec": 51.2 }
+      ],
+      "sources": [
+        { "url": "https://www.tomshardware.com/pc-components/cpus/apples-m4-max-is-the-single-core-performance-king-in-geekbench-6-m4-max-beats-the-core-ultra-9-285k-and-ryzen-9-9950x", "measuredAt": "2026-06", "note": "GB6スコア" },
+        { "url": "https://markaicode.com/benchmarks/llamacpp-m4-max-benchmark/", "measuredAt": "2026-06", "note": "70B 12.5 tok/s" },
+        { "url": "https://browser.geekbench.com/processors/apple-m4-max", "measuredAt": "2026-06" }
+      ]
+    },
+    {
+      "id": "ryzen-ai-max-395",
+      "kind": "apu",
+      "name": "AMD Ryzen AI Max+ 395 (Strix Halo)",
+      "specs": {
+        "cpuCores": 16,
+        "threads": 32,
+        "arch": "Zen 5",
+        "igpu": "Radeon 8060S (RDNA 3.5, 40 CU, ~RTX 4060級)",
+        "npuTops": 50,
+        "memoryMaxGB": 128,
+        "memoryType": "Unified LPDDR5X-8000",
+        "memBandwidthGBs": 256,
+        "memBandwidthEffectiveGBs": 215
+      },
+      "benchmarks": { "geekbench6": { "single": 2900, "multi": 20000, "note": "実測レンジ SC2,894-2,928 / MC19,484-20,708" } },
+      "llm": [
+        { "model": "Llama 70B", "quant": "Q4", "tokPerSec": 5, "note": "帯域律速。M4 Maxの約半分" },
+        { "model": "GPT-OSS 120B", "quant": "—", "tokPerSec": null, "note": "128GB統合に乗り動作可。M4 Max 48GBでは不可" },
+        { "model": "Qwen3 235B", "quant": "—", "tokPerSec": null, "note": "動作報告あり" }
+      ],
+      "sources": [
+        { "url": "https://www.cpu-monkey.com/en/benchmark-amd_ryzen_ai_max_plus_395-geekbench_6_multi_core", "measuredAt": "2026-06", "note": "GB6" },
+        { "url": "https://llm-tracker.info/AMD-Strix-Halo-(Ryzen-AI-Max+-395)-GPU-Performance", "measuredAt": "2026-06", "note": "帯域 実効~215GB/s" },
+        { "url": "https://www.hardware-corner.net/strix-halo-llm-optimization/", "measuredAt": "2026-06", "note": "LLM最適化・実測" },
+        { "url": "https://forum.level1techs.com/t/strix-halo-ryzen-ai-max-395-llm-benchmark-results/233796", "measuredAt": "2026-06" }
+      ]
+    },
+    {
+      "id": "ryzen-9-9950x3d",
+      "kind": "cpu",
+      "name": "AMD Ryzen 9 9950X3D",
+      "specs": {
+        "cpuCores": 16,
+        "threads": 32,
+        "arch": "Zen 5",
+        "l3CacheMB": 144,
+        "l3CacheNote": "2nd-gen 3D V-Cache",
+        "tdpW": 170
+      },
+      "benchmarks": { "geekbench6": { "single": 3300, "multi": 22000, "note": "概算。実測で要更新" } },
+      "sources": [
+        { "url": "https://www.techpowerup.com/cpu-specs/ryzen-9-9950x3d.c3993", "measuredAt": "2026-06", "note": "スペック" }
+      ]
+    },
+    {
+      "id": "rtx-5090",
+      "kind": "gpu",
+      "name": "NVIDIA GeForce RTX 5090",
+      "specs": {
+        "vramGB": 32,
+        "vramType": "GDDR7",
+        "memBandwidthGBs": 1792,
+        "tdpW": 575
+      },
+      "llm": [
+        { "model": "~45B まで", "quant": "Q4", "tokPerSec": null, "note": "32GBに全GPUで載る範囲は爆速" },
+        { "model": "Llama 70B", "quant": "Q4", "tokPerSec": null, "note": "~38-40GB必要。32GB超でoffload必須=失速" }
+      ],
+      "sources": [
+        { "url": "https://bestvaluegpu.com/history/new-and-used-rtx-5090-price-history-and-specs/", "measuredAt": "2026-06" }
+      ]
+    },
+    {
+      "id": "beelink-gtr9-pro-128-2tb",
+      "kind": "machine",
+      "name": "Beelink GTR9 Pro (128GB / 2TB)",
+      "components": ["ryzen-ai-max-395"],
+      "specs": { "memoryGB": 128, "storageGB": 2048, "linux": "対応" },
+      "sources": [
+        { "url": "https://pc.watch.impress.co.jp/docs/news/2039000.html", "measuredAt": "2026-06", "note": "「Mac Studio風」筐体。日本予約開始" }
+      ]
+    },
+    {
+      "id": "gmktec-evo-x2-128-2tb",
+      "kind": "machine",
+      "name": "GMKtec EVO-X2 (128GB / 2TB)",
+      "components": ["ryzen-ai-max-395"],
+      "specs": { "memoryGB": 128, "storageGB": 2048, "linux": "対応" },
+      "sources": [
+        { "url": "https://www.tomshardware.com/desktops/mini-pcs/gmktec-evo-x2-ai-mini-pc-review", "measuredAt": "2026-06", "note": "レビュー" },
+        { "url": "https://www.microcenter.com/product/695875/gmktec-evo-x2-ai-mini-pc", "measuredAt": "2026-06" }
+      ]
+    },
+    {
+      "id": "framework-desktop-128",
+      "kind": "machine",
+      "name": "Framework Desktop (Ryzen AI Max+ 395 / 128GB)",
+      "components": ["ryzen-ai-max-395"],
+      "specs": { "memoryGB": 128, "linux": "最良(Phoronix絶賛)" },
+      "sources": [
+        { "url": "https://www.phoronix.com/review/framework-desktop-linux/9", "measuredAt": "2026-06", "note": "Linuxレビュー" },
+        { "url": "https://liliputing.com/more-ryzen-ai-max-395-mini-pcs-with-128gb-are-now-available-if-you-can-afford-one/", "measuredAt": "2026-06" }
+      ]
+    }
+  ]
+}
